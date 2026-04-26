@@ -1,0 +1,23 @@
+version: '3.8'
+
+# ==========================================
+# ENTORNO DE DESARROLLO
+# ==========================================
+# Uso: docker-compose up -d
+# Propósito: Permite editar y previsualizar en tiempo real.
+
+services:
+  web-dev:
+    image: nginx:alpine
+    container_name: lisc_web_dev
+    ports:
+      # Disponible en tu máquina en http://localhost:8080
+      - "8080:80"
+    volumes:
+      # MONTAMOS los archivos locales hacia dentro del contenedor.
+      # ¡Cualquier cambio que guardes se reflejará al actualizar el navegador!
+      - ./index.html:/usr/share/nginx/html/index.html
+      - ./styles.css:/usr/share/nginx/html/styles.css
+      - ./script.js:/usr/share/nginx/html/script.js
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    restart: unless-stopped

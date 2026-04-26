@@ -1,0 +1,18 @@
+version: '3.8'
+
+# ==========================================
+# ENTORNO DE PRODUCCIÓN
+# ==========================================
+# Uso: docker-compose -f docker-compose.prod.yml up -d --build
+# Propósito: Construye una imagen sólida e independiente y la ejecuta.
+
+services:
+  web-prod:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: lisc_web_prod
+    ports:
+      # Disponible en el puerto 80 oficial de tu servidor Knossos
+      - "80:80"
+    restart: always
