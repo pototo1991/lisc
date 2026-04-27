@@ -3,125 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LISC Solutions | Donde el Algoritmo se une con la Estrategia</title>
-    <meta name="description" content="Consultoría Integral en Desarrollo de Software, Automatización de Procesos y Gestión Administrativa-Contable.">
+    <title>LISC Solutions | Ingeniería & Estrategia</title>
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Google Fonts: Outfit for modern, geometric typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
-    <!-- Icons (Phosphor Icons - clean and premium) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 </head>
 <body>
+    <div class="noise-overlay"></div>
+    <div class="bg-aurora">
+        <div class="aurora-blob blob-1"></div>
+        <div class="aurora-blob blob-2"></div>
+        <div class="aurora-blob blob-3"></div>
+    </div>
 
-    <!-- Subtle circuit-like animated background -->
-    <div class="bg-pattern" id="bg-pattern"></div>
-    <div class="bg-glow"></div>
-
-    <nav class="navbar glass">
-        <div class="nav-container text-gradient font-bold">
-            <i class="ph ph-hexagon"></i> LISC Solutions
+    <nav class="navbar glass slide-down">
+        <div class="nav-container text-gradient-animated font-bold">
+            <i class="ph-fill ph-hexagon"></i> LISC Solutions
         </div>
     </nav>
 
-    <!-- 1. Hero Section -->
-    <header class="section hero-section" id="hero">
-        <div class="container animate-on-scroll">
-            <h1 class="hero-title">
-                LISC Solutions: Donde el <span class="text-gradient">Algoritmo</span> se une con la <span class="text-gradient">Estrategia</span>.
-            </h1>
-            <p class="hero-subtitle">
-                Consultoría Integral en Desarrollo de Software, Automatización de Procesos y Gestión Administrativa-Contable.
-            </p>
-            <div class="hero-actions">
-                <a href="#servicios" class="btn btn-primary">Descubre Más <i class="ph ph-arrow-down"></i></a>
-                <a href="mailto:walter@lisc.cl" class="btn btn-secondary glass">Contactar con Walter</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- 2. Servicios -->
-    <section class="section" id="servicios">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll text-gradient text-center">Nuestros Servicios</h2>
-            
-            <div class="grid services-grid">
-                <!-- Servicio 1 -->
-                <article class="card glass animate-on-scroll delay-1">
-                    <div class="card-icon text-gradient">
-                        <i class="ph ph-cpu"></i>
-                    </div>
-                    <h3>Ingeniería de Software</h3>
-                    <p>Desarrollo backend sólido en Python/Django, implementaciones en Docker y gestión de infraestructura Linux.</p>
-                </article>
-
-                <!-- Servicio 2 -->
-                <article class="card glass animate-on-scroll delay-2">
-                    <div class="card-icon text-gradient">
-                        <i class="ph ph-robot"></i>
-                    </div>
-                    <h3>Automatización Inteligente</h3>
-                    <p>Optimización de flujos de trabajo con n8n, integración de IA local (Ollama) y monitoreo de sistemas.</p>
-                </article>
-
-                <!-- Servicio 3 -->
-                <article class="card glass animate-on-scroll delay-3">
-                    <div class="card-icon text-gradient">
-                        <i class="ph ph-chart-line-up"></i>
-                    </div>
-                    <h3>Auditoría y Estrategia</h3>
-                    <p>Consultoría contable y analítica para empresas que buscan orden financiero basado en datos reales.</p>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. Producto Estrella: MaqLogik -->
-    <section class="section" id="producto">
-        <div class="container">
-            <div class="product-banner glass animate-on-scroll">
-                <div class="product-content">
-                    <div class="tag text-gradient">Producto Estrella</div>
-                    <h2 class="product-title">MaqLogik</h2>
-                    <p>
-                        Nuestra solución líder para la gestión y control de maquinaria. Eficiencia operativa al alcance de un clic.
+    <main>
+        <header class="section hero-section" id="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="pill-badge mb-4 fade-up delay-1">Innovación & Tecnología</div>
+                    <h1 class="hero-title">
+                        <span class="reveal-text delay-2"><span>Donde el <span class="text-gradient-animated">Algoritmo</span></span></span><br>
+                        <span class="reveal-text delay-3"><span>se une con la <span class="text-gradient-animated">Estrategia</span></span></span>
+                    </h1>
+                    <p class="hero-subtitle fade-up delay-4">
+                        Transformamos datos en decisiones. Consultoría de alto nivel en ingeniería de software y automatización inteligente.
                     </p>
-                    <a href="https://maqlogik.cl" target="_blank" rel="noopener" class="btn btn-primary mt-4">
-                        Ir a MaqLogik.cl <i class="ph ph-arrow-up-right"></i>
-                    </a>
+                    <div class="hero-actions fade-up delay-5">
+                        <a href="#servicios" class="btn btn-primary">Soluciones</a>
+                        <a href="#contacto" class="btn btn-secondary glass">Contacto</a>
+                    </div>
                 </div>
-                <div class="product-visual">
-                    <div class="floating-mockup">
-                        <i class="ph ph-truck"></i> Módulo de Flota
-                        <div class="sparkle"></div>
+                <div class="hero-visual fade-up delay-6">
+                    <div class="image-wrapper glass-border float-anim">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" alt="Tech" class="hover-zoom">
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <!-- 4. La Fundación -->
-    <section class="section foundation-section" id="fundacion">
-        <div class="container">
-            <div class="foundation-card glass-soft animate-on-scroll">
-                <i class="ph ph-hands-clapping text-gradient foundation-icon"></i>
-                <h2>Fundación LISC</h2>
-                <p>
-                    Comprometidos con el desarrollo tecnológico con impacto social. Transformando el conocimiento en progreso para la comunidad.
-                </p>
+        <section class="section" id="servicios">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll text-center">Nuestras <span class="text-gradient-animated">Soluciones</span></h2>
+                <div class="bento-grid">
+                    <article class="card glass tilt-card animate-on-scroll delay-1">
+                        <div class="card-content">
+                            <div class="card-icon"><i class="ph-fill ph-cpu"></i></div>
+                            <h3>Ingeniería Backend</h3>
+                            <p>Sistemas escalables en Python/Django y orquestación con Docker.</p>
+                        </div>
+                    </article>
+                    <article class="card glass tilt-card image-card bento-span-2 animate-on-scroll delay-2">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000" class="card-bg-img">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <div class="card-icon"><i class="ph-fill ph-robot"></i></div>
+                            <h3>Automatización IA</h3>
+                            <p>Flujos avanzados con n8n e integración de modelos locales (Ollama).</p>
+                        </div>
+                    </article>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
+        <section class="section" id="producto">
+            <div class="container">
+                <div class="product-banner glass tilt-card animate-on-scroll">
+                    <div class="card-content product-content-wrapper">
+                        <div class="product-info">
+                            <div class="pill-badge glass mb-4">SaaS</div>
+                            <h2 class="product-title">MaqLogik</h2>
+                            <p class="mb-4">Control total de flota pesada en tiempo real.</p>
+                            <a href="https://www.maqlogik.cl" target="_blank" class="btn btn-primary">Explorar</a>
+                        </div>
+                        <div class="product-visual">
+                            <div class="image-wrapper dashboard-mockup">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <footer class="footer">
-        <div class="container">
-            <p>&copy; <span id="year"></span> LISC Solutions. Todos los derechos reservados.</p>
-            <p>Diseñado para conectar código y estrategia.</p>
-        </div>
+        <p>&copy; <span id="year"></span> LISC Solutions.</p>
     </footer>
 
     <script src="script.js"></script>

@@ -1,485 +1,132 @@
-/* === ROOT VARIABLES - SOFISTICADO, JUVENIL Y DINÁMICO (SIN NEÓN) === */
 :root {
-    --bg-base: #f8fafc; /* Fondo claro y limpio */
+    --bg-base: #09090b; 
+    --bg-surface: #18181b;
+    --text-main: #fafafa; 
+    --text-muted: #a1a1aa; 
+    --aurora-1: #4f46e5; 
+    --aurora-2: #7c3aed; 
+    --aurora-3: #e11d48; 
     
-    /* Colores sobrios para el texto */
-    --text-main: #0f172a; /* Pizarra muy oscuro */
-    --text-muted: #64748b; /* Gris azulado para subtítulos */
+    --glass-bg: rgba(24, 24, 27, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --glass-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.6);
     
-    /* Acentos sofisticados (nada de neón, colores vibrantes pero elegantes) */
-    --accent-primary: #4f46e5; /* Índigo profundo y profesional */
-    --accent-secondary: #2563eb; /* Azul rey */
-    --accent-tertiary: #ec4899; /* Rosa suave para dinamismo */
-    
-    /* Tarjetas estilo "Glass" fluido y claro */
-    --card-bg: rgba(255, 255, 255, 0.6);
-    --card-border: rgba(255, 255, 255, 0.8);
-    
-    /* Sombras naturales y profundas, no brillantes */
-    --shadow-soft: 0 20px 40px -15px rgba(15, 23, 42, 0.08);
-    --shadow-hover: 0 30px 60px -20px rgba(79, 70, 229, 0.15);
-    
-    /* Transiciones dinámicas con un toque de "rebote" elástico */
-    --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* CURVA CINEMÁTICA: Rápida al inicio, muy lenta al final */
+    --ease-premium: cubic-bezier(0.16, 1, 0.3, 1); 
+    --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* === RESET & FOUNDATION === */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: var(--bg-base);
     color: var(--text-main);
     line-height: 1.6;
     overflow-x: hidden;
-    position: relative;
-    scroll-behavior: smooth;
 }
 
-/* Typography */
-h1, h2, h3 {
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-    color: var(--text-main);
+/* --- ELEMENTOS DE FONDO --- */
+.noise-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 999; opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-p {
-    color: var(--text-muted);
-    font-size: 1.15rem;
-    font-weight: 400;
+.bg-aurora {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; background: var(--bg-base);
 }
 
-/* === BACKGROUND EFFECTS (MESH GRADIENT DINÁMICO) === */
-.bg-pattern {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -2;
-    background-color: var(--bg-base);
+.aurora-blob {
+    position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.25;
+    transition: transform 1.2s var(--ease-premium); /* Suaviza el parallax */
 }
+.blob-1 { width: 60vw; height: 60vw; background: var(--aurora-1); top: -20%; left: -10%; }
+.blob-2 { width: 50vw; height: 50vw; background: var(--aurora-2); bottom: -10%; right: -10%; }
+.blob-3 { width: 40vw; height: 40vw; background: var(--aurora-3); top: 20%; left: 20%; opacity: 0.1; }
 
-/* Creando un fondo "Mesh Gradient" que se mueve fluidamente. Elegante y muy moderno. */
-.bg-glow {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    overflow: hidden;
-    opacity: 0.8;
-}
+/* --- COMPONENTES --- */
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.section { padding: 8rem 0; }
 
-.bg-glow::before, .bg-glow::after, .bg-pattern::after {
-    content: '';
-    position: absolute;
-    width: 60vw;
-    height: 60vw;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.5;
-    animation: floatingMesh 20s infinite alternate ease-in-out;
-}
-
-.bg-glow::before {
-    background: var(--accent-primary);
-    top: -20vh;
-    left: -10vw;
-}
-
-.bg-glow::after {
-    background: var(--accent-tertiary);
-    bottom: -20vh;
-    right: -10vw;
-    animation-delay: -5s;
-    animation-direction: alternate-reverse;
-}
-
-.bg-pattern::after {
-    background: var(--accent-secondary);
-    top: 40vh;
-    left: 40vw;
-    width: 50vw;
-    height: 50vw;
-    z-index: -1;
-    animation-delay: -10s;
-}
-
-@keyframes floatingMesh {
-    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-    50% { transform: translate(10vw, 5vh) scale(1.1) rotate(45deg); }
-    100% { transform: translate(-5vw, 15vh) scale(0.9) rotate(90deg); }
-}
-
-/* === UTILITIES & COMPONENTS === */
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.section {
-    padding: 8rem 0;
-    position: relative;
-}
-
-.text-center { text-align: center; }
-.mt-4 { margin-top: 2rem; }
-
-/* El texto degradado ahora usa colores sobrios pero de alto contraste */
-.text-gradient {
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
-}
-
-/* Glassmorphism Refinado y Sofisticado */
 .glass {
-    background: var(--card-bg);
-    backdrop-filter: blur(24px) saturate(150%);
-    -webkit-backdrop-filter: blur(24px) saturate(150%);
-    border: 1px solid var(--card-border);
-    box-shadow: var(--shadow-soft);
-    border-radius: 32px; /* Esquinas muy redondeadas (estilo juvenil Apple/Bento) */
+    background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); border-radius: 32px;
 }
 
-.glass-soft {
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 32px;
-}
-
-/* === BOTONES (Dinamismo elástico) === */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1.1rem 2.2rem;
-    border-radius: 100px;
-    font-weight: 700;
-    font-size: 1.05rem;
-    text-decoration: none;
-    transition: var(--transition-bounce);
-    cursor: pointer;
-    border: none;
-    position: relative;
-    overflow: hidden;
-    letter-spacing: -0.01em;
-}
-
-.btn-primary {
-    background: var(--text-main);
-    color: white;
-    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.15);
-}
-
-.btn-primary:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 15px 25px rgba(15, 23, 42, 0.25);
-    background: var(--accent-primary);
-}
-
-.btn-secondary {
-    background: rgba(255, 255, 255, 0.8);
-    color: var(--text-main);
-    backdrop-filter: blur(10px);
-}
-
-.btn-secondary:hover {
-    background: white;
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-}
-
-/* === NAVBAR === */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-    padding: 1.2rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.4);
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 0;
-}
-
-.nav-container {
-    padding: 0 2rem;
-    font-size: 1.4rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--text-main);
-}
-
-.nav-container i {
-    color: var(--accent-primary);
-}
-
-/* === HERO SECTION === */
-.hero-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding-top: 100px;
-}
-
-.hero-title {
-    font-size: clamp(3rem, 7vw, 5.5rem);
-    margin-bottom: 1.5rem;
-    color: var(--text-main);
-}
-
-.hero-subtitle {
-    font-size: clamp(1.2rem, 2vw, 1.4rem);
-    max-width: 700px;
-    margin: 0 auto 3rem auto;
-    font-weight: 500;
-}
-
-.hero-actions {
-    display: flex;
-    gap: 1.2rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* === SERVICES SECTION (BENTO GRID STYLE) === */
-.section-title {
-    font-size: clamp(2.5rem, 4vw, 3.5rem);
-    margin-bottom: 4rem;
-}
-
-.grid {
-    display: grid;
-    gap: 2rem;
-}
-
-.services-grid {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-}
-
-.card {
-    padding: 3rem 2.5rem;
-    transition: var(--transition-bounce);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-}
-
-.card:hover {
-    transform: translateY(-12px);
-    box-shadow: var(--shadow-hover);
-    border-color: white;
-}
-
-.card-icon {
-    font-size: 3rem;
-    margin-bottom: 2rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 70px;
-    height: 70px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    color: var(--accent-primary);
-    transition: var(--transition-bounce);
-}
-
-.card:hover .card-icon {
-    transform: scale(1.15) rotate(-5deg);
-    background: var(--text-main);
-    color: white;
-}
-
-.card h3 {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-    color: var(--text-main);
-}
-
-/* === PRODUCT SECTION === */
-.product-banner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 4rem;
-    border-radius: 40px;
-    gap: 3rem;
-    position: relative;
-    background: var(--text-main); /* Contraste oscuro en diseño claro es muy sofisticado */
-    color: white;
-    box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.4);
-    overflow: hidden;
-}
-
-.product-banner::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at top right, var(--accent-primary), transparent 60%);
-    opacity: 0.4;
-    z-index: 0;
-}
-
-.product-content, .product-visual {
-    position: relative;
-    z-index: 2;
-}
-
-.product-content {
-    flex: 1;
-}
-
-.product-content p {
-    color: #cbd5e1;
-}
-
-.tag {
-    display: inline-block;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 1.5rem;
-    border: 1px solid rgba(255,255,255,0.2);
-}
-
-.product-title {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    color: white;
-}
-
-.product-banner .btn-primary {
-    background: white;
-    color: var(--text-main);
-}
-
-.product-banner .btn-primary:hover {
-    background: var(--accent-primary);
-    color: white;
-}
-
-.floating-mockup {
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 2.5rem 3rem;
-    border-radius: 30px;
-    font-size: 1.8rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    animation: floatingSmooth 6s ease-in-out infinite;
-}
-
-@keyframes floatingSmooth {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-/* === FOUNDATION SECTION === */
-.foundation-section {
-    padding-bottom: 8rem;
-}
-
-.foundation-card {
-    padding: 4rem 3rem;
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.foundation-icon {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, var(--accent-tertiary), var(--accent-primary));
+.text-gradient-animated {
+    background: linear-gradient(270deg, var(--aurora-1), var(--aurora-2), var(--aurora-3), var(--aurora-1));
+    background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: gradientShift 12s linear infinite; /* Más lento y suave */
 }
 
-.foundation-card h2 {
-    margin-bottom: 1rem;
-    font-size: 2.2rem;
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
 }
 
-/* === FOOTER === */
-.footer {
-    text-align: center;
-    padding: 3rem 2rem;
-    color: var(--text-muted);
+/* --- HERO & BENTO --- */
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.hero-title { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 1.5rem; }
+
+.bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.card { position: relative; overflow: hidden; transform-style: preserve-3d; transition: transform 0.6s var(--ease-premium); }
+.card-content { padding: 3rem; transform: translateZ(20px); /* Menos pop-out */ }
+.bento-span-2 { grid-column: span 2; }
+
+.image-wrapper { border-radius: 24px; overflow: hidden; box-shadow: var(--glass-shadow); border: 1px solid var(--glass-border); }
+.image-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-premium); }
+
+/* --- ANIMACIONES SUAVIZADAS --- */
+
+/* 1. Reveal Text (Línea por línea) */
+.reveal-text { overflow: hidden; display: inline-block; }
+.reveal-text span { 
+    display: block; transform: translateY(105%); 
+    animation: revealAnim 1.2s var(--ease-premium) forwards; 
+}
+@keyframes revealAnim { to { transform: translateY(0); } }
+
+/* 2. Fade Up (Entradas laterales/verticales) */
+.fade-up { 
+    opacity: 0; transform: translateY(15px); /* Menos distancia de salto */
+    animation: fadeUpAnim 1.2s var(--ease-premium) forwards; 
+}
+@keyframes fadeUpAnim { to { opacity: 1; transform: translateY(0); } }
+
+/* 3. Float (Hero Image) */
+.float-anim { animation: floatEffect 8s ease-in-out infinite; }
+@keyframes floatEffect {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
 }
 
-.footer p {
-    font-size: 1rem;
-    margin: 0.5rem 0;
+/* 4. Scroll Reveal */
+.animate-on-scroll { 
+    opacity: 0; transform: translateY(20px) scale(0.98); 
+    transition: opacity 1.2s var(--ease-premium), transform 1.2s var(--ease-premium); 
 }
+.animate-on-scroll.is-visible { opacity: 1; transform: translateY(0) scale(1); }
 
-/* === ANIMATIONS (Scroll Observer) === */
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+/* Delays escalonados más pausados */
+.delay-1 { animation-delay: 0.15s; transition-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; transition-delay: 0.3s; }
+.delay-3 { animation-delay: 0.45s; transition-delay: 0.45s; }
+.delay-4 { animation-delay: 0.6s; }
+.delay-5 { animation-delay: 0.75s; }
+.delay-6 { animation-delay: 0.9s; }
+
+/* Botones */
+.btn {
+    padding: 1rem 2.2rem; border-radius: 100px; font-weight: 500;
+    transition: transform 0.4s var(--ease-premium), background 0.4s ease, box-shadow 0.4s ease;
 }
-
-.animate-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.delay-1 { transition-delay: 0.1s; }
-.delay-2 { transition-delay: 0.2s; }
-.delay-3 { transition-delay: 0.3s; }
-
-/* === RESPONSIVE DESIGN === */
-@media (max-width: 900px) {
-    .product-banner {
-        flex-direction: column;
-        text-align: center;
-        padding: 3rem 2rem;
-    }
-    
-    .floating-mockup {
-        margin-top: 2rem;
-        font-size: 1.4rem;
-        padding: 2rem;
-    }
-}
+.btn:hover { transform: scale(1.03) translateY(-2px); }
 
 @media (max-width: 768px) {
-    .hero-title { font-size: 2.8rem; }
-    .hero-actions { flex-direction: column; width: 100%; }
-    .hero-actions .btn { width: 100%; justify-content: center; }
-    .card { padding: 2rem; align-items: center; text-align: center; }
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .bento-grid { grid-template-columns: 1fr; }
+    .bento-span-2 { grid-column: span 1; }
 }
